@@ -12,6 +12,8 @@ services:
       - "80:80"
       - "81:81"
       - "443:443"
+    networks:
+      - bridge_net
 
   ts3:
     image: teamspeak
@@ -25,6 +27,8 @@ services:
       - "30033:30033"
     volumes:
       - ts3_data:/var/ts3server
+    networks:
+      - bridge_net
 
   watchtower:
     image: containrrr/watchtower
@@ -34,7 +38,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       WATCHTOWER_CLEANUP: "true"
-      WATCHTOWER_POLL_INTERVAL: "3600" # Check for updates every hour
+      WATCHTOWER_POLL_INTERVAL: "3600" 
+    networks:
+      - bridge_net
 
 volumes:
   npm_data:
@@ -43,3 +49,12 @@ volumes:
     driver: local
   ts3_data:
     driver: local
+
+networks:
+  bridge_net:
+    enable_ipv6: true
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.20.0.0/16"
+        - subnet: "2001:db8:1::/64"
