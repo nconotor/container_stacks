@@ -15,21 +15,23 @@ services:
     networks:
       - bridge_net
 
-  ts3:
-    image: teamspeak:debian
-    container_name: ts3
-    restart: always
-    environment:
-      TS3SERVER_LICENSE: accept
-      TZ: Europe/Berlin
-    ports:
-      - "9987:9987/udp"
-      - "10011:10011"
-      - "30033:30033"
-    volumes:
-      - ts3_data:/var/ts3server
-    networks:
-      - bridge_net
+version: '3.1'
+
+ts3:
+  image: mbentley/teamspeak
+  container_name: ts3
+  restart: always
+  environment:
+    TS3SERVER_LICENSE: accept
+    TZ: Europe/Berlin
+  ports:
+    - "9987:9987/udp"
+    - "10011:10011"
+    - "30033:30033"
+  volumes:
+    - ts3_data:/var/ts3server
+  networks:
+    - bridge_net
 
   watchtower:
     image: containrrr/watchtower
