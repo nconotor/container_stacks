@@ -21,16 +21,10 @@ services:
     restart: always
     environment:
       TS3SERVER_LICENSE: accept
-    ports:
-      - "9987:9987/udp"
-      - "10011:10011"
-      - "30033:30033"
+    network_mode: "host"
     volumes:
       - ts3_data:/var/ts3server
-      - /etc/localtime:/etc/localtime:ro
       - /usr/share/zoneinfo/Europe/Berlin:/etc/localtime:ro
-    networks:
-      - bridge_net
       
   watchtower:
     image: containrrr/watchtower
