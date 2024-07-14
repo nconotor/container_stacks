@@ -27,6 +27,7 @@ services:
       - "30033:30033"
     volumes:
       - ts3_data:/var/ts3server
+      - /etc/localtime:/etc/localtime:ro
       - /usr/share/zoneinfo/Europe/Berlin:/etc/localtime:ro
     networks:
       - bridge_net
