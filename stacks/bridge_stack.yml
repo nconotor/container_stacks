@@ -14,9 +14,7 @@ services:
       - "443:443"
     networks:
       - bridge_net
-
-version: '3.1'
-
+      
 ts3:
   image: mbentley/teamspeak
   container_name: ts3
