@@ -21,6 +21,7 @@ services:
     restart: always
     environment:
       TS3SERVER_LICENSE: accept
+      TZ: Europe/Berlin
     ports:
       - "9987:9987/udp"
       - "10011:10011"
